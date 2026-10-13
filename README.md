@@ -1,4 +1,3 @@
-# AI-RESUME-ASSISTANCE-
 # 📄 ATS Resume Analyzer
 
 Upload a resume (PDF, DOCX or TXT) and get an **ATS score**, strengths, weaknesses,
