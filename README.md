@@ -64,6 +64,20 @@ the sidebar or with the `GEMINI_MODEL` environment variable, e.g. `gemini-2.5-fl
 > If your app is public and you store your key in Secrets, anyone using the app spends your
 > Gemini quota. To avoid this, leave the secret out so each visitor enters their own key.
 
+## Troubleshooting
+
+**`ModuleNotFoundError` / "Missing package"** - the hosting platform did not install the
+packages. Make sure `requirements.txt` is in the **root** of your repo (next to `app.py`),
+is named exactly `requirements.txt`, and that no other dependency file (`Pipfile`,
+`pyproject.toml`, `environment.yml`) exists. Then reboot the app. As a safety net, `app.py`
+also tries to install missing packages itself on first run (takes about 30 seconds).
+
+**"API key not valid" / 403** - check the key at <https://aistudio.google.com/apikey>.
+
+**"429 / quota exceeded"** - you hit the free-tier rate limit; wait a minute and retry.
+
+**Model not found** - change the model name in the sidebar, e.g. `gemini-2.5-flash`.
+
 ## Privacy
 
 Resumes are processed in memory and sent to the Gemini API for analysis. The app does not
