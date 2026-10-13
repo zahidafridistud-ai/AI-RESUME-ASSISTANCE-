@@ -90,7 +90,10 @@ def extract_text(file_bytes: bytes, filename: str) -> str:
     ext = filename.lower().rsplit(".", 1)[-1] if "." in filename else ""
 
     if ext == "pdf":
-        from pypdf import PdfReader
+        try:
+            from pypdf import PdfReader
+        except ImportError as exc:
+            raise ValueError("Missing package 'pypdf'. Add it to requirements.txt and reboot the app.") from exc
 
         try:
             reader = PdfReader(io.BytesIO(file_bytes))
@@ -103,7 +106,10 @@ def extract_text(file_bytes: bytes, filename: str) -> str:
             raise ValueError(f"Could not read this PDF ({exc.__class__.__name__}).") from exc
 
     elif ext == "docx":
-        from docx import Document
+        try:
+            from docx import Document
+        except ImportError as exc:
+            raise ValueError("Missing package 'python-docx'. Add it to requirements.txt and reboot the app.") from exc
 
         try:
             doc = Document(io.BytesIO(file_bytes))
